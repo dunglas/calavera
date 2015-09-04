@@ -9,7 +9,7 @@ Those files include metadata extracted from the Git repository (author name, las
 JSON-LD files are easily consumed by JavaScript libraries and framework such as [Angular](https://angular.io/), [Flux](https://facebook.github.io/flux/)
 and [jQuery](https://jquery.com/).
 
-Websites generated with Calavera can easily (and freely) by hosted on [GitHub Pages](https://pages.github.com/).
+Websites generated with Calavera can easily (and freely) be hosted on [GitHub Pages](https://pages.github.com/).
 
 [![Build Status](https://travis-ci.org/dunglas/calavera.svg?branch=master)](https://travis-ci.org/dunglas/calavera)
 
