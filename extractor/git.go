@@ -56,6 +56,7 @@ func (git Git) Extract(creativeWork *schema.CreativeWork, path string) error {
 	}
 
 	if err := cmd.Wait(); err != nil {
+		log.Fatalln("You are not in a git repository.")
 		return err
 	}
 
