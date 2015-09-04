@@ -61,7 +61,7 @@ func convert(path string, outputDirectory string, extractors []extractor.Extract
 		check(err)
 	}
 
-	jsonContent, err := json.Marshal(creativeWork)
+	jsonContent, err := json.MarshalIndent(creativeWork, "", "\t")
 	check(err)
 
 	outputPath := fmt.Sprint(outputDirectory, "/", path[:len(path) - 3], ".jsonld")
