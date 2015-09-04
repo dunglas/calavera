@@ -17,7 +17,7 @@ import (
 
 func main() {	
 	flag.Usage = func() {
-		fmt.Println("markdown-to-json input_directory output_directory")
+		fmt.Println("calavera input_directory output_directory")
 	}
 
 	flag.Parse()
