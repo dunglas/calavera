@@ -4,15 +4,8 @@ go:
   - 1.5
   - tip
 
-matrix:
-  allow_failures:
-    - go: tip
-
-install:
-  - go get
-
 script:
   - go test
   - go build
-
+  - mkdir out && ./calavera fixtures out && ls -R out
 
