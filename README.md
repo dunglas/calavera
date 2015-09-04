@@ -11,6 +11,8 @@ and [jQuery](https://jquery.com/).
 
 Websites generated with Calavera can easily (and freely) by hosted on [GitHub Pages](https://pages.github.com/).
 
+[![Build Status](https://travis-ci.org/dunglas/calavera.svg?branch=master)](https://travis-ci.org/dunglas/calavera)
+
 ## Install
 
 [Go](https://golang.org/) programming language is the only required dependency to compile Calavera.
