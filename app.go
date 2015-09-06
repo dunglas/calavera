@@ -20,7 +20,11 @@ func main() {
 		fmt.Println("calavera input_directory output_directory")
 	}
 
+	prettifyBool := flag.Bool("prettify", false, "Prettify json output")
+
 	flag.Parse()
+
+
 
 	if len(flag.Args()) != 2 {
 		log.Fatalln("Input and output directories are mandatory arguments.")
@@ -45,7 +49,7 @@ func main() {
 	for _, file := range files {
 		wg.Add(1)
 		go func(file string) {
-			convert(file, flag.Arg(1), extractors)
+			convert(file, flag.Arg(1), extractors, *prettifyBool)
 			defer wg.Done()
 		}(file)
 	}
@@ -53,7 +57,7 @@ func main() {
 	wg.Wait()
 }
 
-func convert(path string, outputDirectory string, extractors []extractor.Extractor) {
+func convert(path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
 	creativeWork := schema.NewCreativeWork()
 
 	for _, extractor := range extractors {
@@ -61,7 +65,13 @@ func convert(path string, outputDirectory string, extractors []extractor.Extract
 		check(err)
 	}
 
-	jsonContent, err := json.Marshal(creativeWork)
+	var jsonContent []byte
+	var err error
+	if prettify {
+		jsonContent, err = json.MarshalIndent(creativeWork, "", "\t")
+	} else {
+		jsonContent, err = json.Marshal(creativeWork)
+	}
 	check(err)
 
 	outputPath := fmt.Sprint(outputDirectory, "/", path[:len(path) - 3], ".jsonld")
