@@ -2,7 +2,6 @@ package extractor
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"net/url"
 	"strings"
@@ -32,8 +31,8 @@ func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string)
 		link, _ := s.Attr("href")
 		url, _ := url.Parse(link)
 
-		if !url.IsAbs() && strings.HasSuffix(link, ".md") {
-			s.SetAttr("href", fmt.Sprint(link[:len(link) - 3], ".jsonld"))
+		if !url.IsAbs() {
+			s.SetAttr("href", strings.Replace(link, ".md", ".jsonld", 1))
 		}
 	})
 
