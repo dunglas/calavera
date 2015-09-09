@@ -40,6 +40,10 @@ Go to the source code directory, download external libraries and compile the pro
 
 Markdown files from the `input_directory` will be converted to JSON-LD files in `output_directory`.
 
+### Options
+
+* **-prettify**: Prettify json-ld output files
+
 ## License
 
 Calavera is distributed under [the MIT license](LICENSE).
