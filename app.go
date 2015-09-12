@@ -24,18 +24,23 @@ func main() {
 
 	flag.Parse()
 
-
-
 	if len(flag.Args()) != 2 {
 		log.Fatalln("Input and output directories are mandatory arguments.")
 	}
 	
 	var files []string
 	var extractors = []extractor.Extractor{extractor.Markdown{}, extractor.Git{}}
+
+	inputPath, err := filepath.Abs(flag.Arg(0))
+	check(err)
 	
 	walkFunc := func(path string, _ os.FileInfo, err error) error {
 		if nil == err && strings.HasSuffix(path, ".md") {
-			files = append(files, path)
+			abs, err := filepath.Abs(path)
+			check(err)
+			rel, err := filepath.Rel(inputPath, abs)
+			check(err)
+			files = append(files, rel)
 		}
 
 		return nil
@@ -49,7 +54,7 @@ func main() {
 	for _, file := range files {
 		wg.Add(1)
 		go func(file string) {
-			convert(file, flag.Arg(1), extractors, *prettifyBool)
+			convert(flag.Arg(0), file, flag.Arg(1), extractors, *prettifyBool)
 			defer wg.Done()
 		}(file)
 	}
@@ -57,11 +62,11 @@ func main() {
 	wg.Wait()
 }
 
-func convert(path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
+func convert(inputDirectory string, path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
 	creativeWork := schema.NewCreativeWork()
 
 	for _, extractor := range extractors {
-		err := extractor.Extract(creativeWork, path)
+		err := extractor.Extract(creativeWork, fmt.Sprint(inputDirectory, "/", path))
 		check(err)
 	}
 
