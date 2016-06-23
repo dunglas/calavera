@@ -15,7 +15,13 @@ Websites generated with Calavera can easily (and freely) be hosted on [GitHub Pa
 
 ## Install
 
-[Go](https://golang.org/) programming language is the only required dependency to compile Calavera.
+The easiest way to install Calavera is to use the official [Docker](https://www.docker.com) image:
+
+    $ docker pull dunglas/calavera
+
+Alternatively, you can compile Calavera from sources.
+
+The [Go](https://golang.org/) programming language is the only required dependency to compile Calavera.
 
 If you don't already have a [Go workspace](https://golang.org/doc/code.html#Workspaces), create it: 
 
@@ -36,6 +42,12 @@ Go to the source code directory, download external libraries and compile the pro
 
 ## Usage
 
+If you installed the project using Docker:
+
+    $ docker run dunglas/calavera input_directory output_directory
+
+If you installed it from source:
+
     $ ~/workspace/go/bin/calavera input_directory output_directory
 
 Markdown files from the `input_directory` will be converted to JSON-LD files in `output_directory`.
@@ -51,4 +63,3 @@ Calavera is distributed under [the MIT license](LICENSE).
 ## Credits
 
 Written in Go (golang) by [Kévin Dunglas](https://dunglas.fr) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
-

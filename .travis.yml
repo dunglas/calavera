@@ -9,4 +9,3 @@ script:
   - go test
   - go build
   - mkdir out && ./calavera fixtures out && ls -R out
-

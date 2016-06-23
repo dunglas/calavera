@@ -27,26 +27,40 @@ func main() {
 	if len(flag.Args()) != 2 {
 		log.Fatalln("Input and output directories are mandatory arguments.")
 	}
-	
+
 	var files []string
 	var extractors = []extractor.Extractor{extractor.Markdown{}, extractor.Git{}}
 
 	inputPath, err := filepath.Abs(flag.Arg(0))
 	check(err)
-	
+
+	outputPath, err := filepath.Abs(flag.Arg(1))
+	check(err)
+
+	wd, err := os.Getwd()
+	if nil != err {
+		check(err)
+	}
+
+	if err := os.Chdir(inputPath); err != nil {
+		check(err)
+	}
+
 	walkFunc := func(path string, _ os.FileInfo, err error) error {
-		if nil == err && strings.HasSuffix(path, ".md") {
-			abs, err := filepath.Abs(path)
-			check(err)
-			rel, err := filepath.Rel(inputPath, abs)
-			check(err)
-			files = append(files, rel)
+		if nil != err || !strings.HasSuffix(path, ".md") {
+			return nil
 		}
+
+		abs, err := filepath.Abs(path)
+		check(err)
+		rel, err := filepath.Rel(inputPath, abs)
+		check(err)
+		files = append(files, rel)
 
 		return nil
 	}
 
-	if err := filepath.Walk(flag.Arg(0), walkFunc); nil != err {
+	if err := filepath.Walk(inputPath, walkFunc); nil != err {
 		check(err)
 	}
 
@@ -54,19 +68,23 @@ func main() {
 	for _, file := range files {
 		wg.Add(1)
 		go func(file string) {
-			convert(flag.Arg(0), file, flag.Arg(1), extractors, *prettifyBool)
+			convert(file, outputPath, extractors, *prettifyBool)
 			defer wg.Done()
 		}(file)
 	}
 
 	wg.Wait()
+
+	if err := os.Chdir(wd); err != nil {
+		check(err)
+	}
 }
 
-func convert(inputDirectory string, path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
+func convert(path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
 	creativeWork := schema.NewCreativeWork()
 
 	for _, extractor := range extractors {
-		err := extractor.Extract(creativeWork, fmt.Sprint(inputDirectory, "/", path))
+		err := extractor.Extract(creativeWork, path)
 		check(err)
 	}
 
