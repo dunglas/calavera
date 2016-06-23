@@ -44,7 +44,7 @@ Go to the source code directory, download external libraries and compile the pro
 
 If you installed the project using Docker:
 
-    $ docker run dunglas/calavera input_directory output_directory
+    $ docker run -v /my/src/directory:/in -v /my/output/directory:/out calavera /in /out
 
 If you installed it from source:
 
