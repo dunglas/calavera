@@ -8,6 +8,7 @@ import (
 
 	"github.com/dunglas/calavera/schema"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday"
 )
 
@@ -20,7 +21,8 @@ func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string)
 		return err
 	}
 
-	html := blackfriday.MarkdownCommon(markdownContent)
+	unsafe := blackfriday.MarkdownCommon(markdownContent)
+	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
 
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
 	if nil != err {
