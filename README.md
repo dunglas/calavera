@@ -15,9 +15,7 @@ Websites generated with Calavera can easily (and freely) be hosted on [GitHub Pa
 
 ## Install
 
-The easiest way to install Calavera is to use the official [Docker](https://www.docker.com) image:
-
-    $ docker pull dunglas/calavera
+The easiest way to use Calavera is through [Docker](https://www.docker.com). Just go to the usage section below.
 
 Alternatively, you can compile Calavera from sources.
 
@@ -42,9 +40,9 @@ Go to the source code directory, download external libraries and compile the pro
 
 ## Usage
 
-If you installed the project using Docker:
+Using Docker:
 
-    $ docker run -v /my/src/directory:/in -v /my/output/directory:/out calavera /in /out
+    $ docker run -v /my/src/directory:/in -v /my/output/directory:/out dunglas/calavera /in /out
 
 If you installed it from source:
 
@@ -54,7 +52,7 @@ Markdown files from the `input_directory` will be converted to JSON-LD files in 
 
 ### Options
 
-* **-prettify**: Prettify json-ld output files
+* **-prettify**: Prettify generated JSON-LD files
 
 ## License
 
