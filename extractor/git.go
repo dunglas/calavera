@@ -41,7 +41,7 @@ func (git Git) Extract(creativeWork *schema.CreativeWork, path string) error {
 	scanner := bufio.NewScanner(stdout)
 	for scanner.Scan() {
 		parts := strings.Split(strings.TrimSpace(scanner.Text()), ";")
-		
+
 		author := schema.NewPerson(parts[0], parts[1])
 		creativeWork.Author = append([]schema.Person{*author}, creativeWork.Author...)
 
