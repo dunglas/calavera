@@ -10,6 +10,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday"
+	"regexp"
 )
 
 type Markdown struct {
@@ -24,6 +25,7 @@ func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string)
 	unsafe := blackfriday.MarkdownCommon(markdownContent)
 	p := bluemonday.UGCPolicy()
 	p.RequireNoFollowOnLinks(false)
+	p.AllowAttrs("class").Matching(regexp.MustCompile("^[a-zA-Z0-9-_]+$")).Globally()
 	html := p.SanitizeBytes(unsafe)
 
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
