@@ -22,7 +22,9 @@ func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string)
 	}
 
 	unsafe := blackfriday.MarkdownCommon(markdownContent)
-	html := bluemonday.UGCPolicy().SanitizeBytes(unsafe)
+	p := bluemonday.UGCPolicy()
+	p.RequireNoFollowOnLinks(false)
+	html := p.SanitizeBytes(unsafe)
 
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
 	if nil != err {
