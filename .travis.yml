@@ -6,7 +6,10 @@ go:
   - '1.7'
   - 'tip'
 
+before_install:
+  - go get github.com/mattn/goveralls
+
 script:
-  - go test ./...
+  - $HOME/gopath/bin/goveralls -service=travis-ci
   - go build
-  - mkdir out && ./calavera fixtures out && ls -R out
+  - ! gofmt -d path/to/file.go 2>&1 | read

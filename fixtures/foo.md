@@ -2,7 +2,8 @@
 
 Foo foo foo
 
-[Kévin Dunglas](https://dunglas.fr)
+[Absolute URL](https://dunglas.fr)
+[Relative URL](index.md)
 
 ```php
 echo 'Foo';

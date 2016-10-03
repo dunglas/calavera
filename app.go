@@ -15,7 +15,7 @@ import (
 	"github.com/dunglas/calavera/schema"
 )
 
-func main() {	
+func main() {
 	flag.Usage = func() {
 		fmt.Println("calavera input_directory output_directory")
 	}
@@ -97,7 +97,7 @@ func convert(path string, outputDirectory string, extractors []extractor.Extract
 	}
 	check(err)
 
-	outputPath := fmt.Sprint(outputDirectory, "/", path[:len(path) - 3], ".jsonld")
+	outputPath := fmt.Sprint(outputDirectory, "/", path[:len(path)-3], ".jsonld")
 	outputSubdirectory := filepath.Dir(outputPath)
 
 	err = os.MkdirAll(outputSubdirectory, 0755)
