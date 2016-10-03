@@ -6,12 +6,14 @@ Basically, it converts Markdown files stored in a [Git](https://git-scm.com/) re
 using the [Schema.org](https://schema.org/) vocabulary.
 Those files include metadata extracted from the Git repository (author name, last modification date...).
 
-JSON-LD files are easily consumed by JavaScript libraries and framework such as [Angular](https://angular.io/), [Flux](https://facebook.github.io/flux/)
-and [jQuery](https://jquery.com/).
+JSON-LD files are easily consumed by JavaScript libraries and framework such as [React](https://facebook.github.io/react/),
+[Angular](https://angular.io/) or [jQuery](https://jquery.com/).
 
 Websites generated with Calavera can be freely and easily hosted on [GitHub Pages](https://pages.github.com/).
 
-[![Build Status](https://travis-ci.org/dunglas/calavera.svg?branch=master)](https://travis-ci.org/dunglas/calavera)
+[![Travis](https://img.shields.io/travis/dunglas/calavera.svg?maxAge=2592000)](https://travis-ci.org/dunglas/calavera)
+[![Coveralls](https://img.shields.io/coveralls/dunglas/calavera.svg?maxAge=2592000)](https://coveralls.io/github/dunglas/calavera)
+[![Docker Automated buil](https://img.shields.io/docker/automated/dunglas/calavera.svg?maxAge=2592000)](https://hub.docker.com/r/dunglas/calavera/)
 
 ## Install
 

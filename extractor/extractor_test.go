@@ -17,7 +17,7 @@ func TestMarkdown_Extract(t *testing.T) {
 	}
 
 	if creativeWork.Name != "Foo" {
-		t.Error("Title should be \"Foo\", but is \"" + creativeWork.Name + "\".")
+		t.Errorf("Title should be \"Foo\", but is \"%s\"." + creativeWork.Name)
 	}
 
 	if strings.Contains(creativeWork.Text, ".md") {

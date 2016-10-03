@@ -60,6 +60,5 @@ func (git Git) Extract(creativeWork *schema.CreativeWork, path string) error {
 		return err
 	}
 
-
 	return nil
 }

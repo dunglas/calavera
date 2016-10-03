@@ -25,7 +25,7 @@ func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string)
 	unsafe := blackfriday.MarkdownCommon(markdownContent)
 	p := bluemonday.UGCPolicy()
 	p.RequireNoFollowOnLinks(false)
-	p.AllowAttrs("class").Matching(regexp.MustCompile("^[a-zA-Z0-9-_]+$")).Globally()
+	p.AllowAttrs("class").Matching(regexp.MustCompile("^language-[a-zA-Z0-9]+$")).OnElements("code")
 	html := p.SanitizeBytes(unsafe)
 
 	doc, err := goquery.NewDocumentFromReader(bytes.NewReader(html))
