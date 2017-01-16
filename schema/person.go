@@ -3,7 +3,7 @@ package schema
 // Person stores the name and the email of a contributor.
 type Person struct {
 	JsonLd
-	Name string `json:"name"`
+	Name  string `json:"name"`
 	Email string `json:"email,omitempty"`
 }
 

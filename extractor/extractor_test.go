@@ -1,9 +1,9 @@
 package extractor
 
 import (
-	"testing"
 	"github.com/dunglas/calavera/schema"
 	"strings"
+	"testing"
 )
 
 func TestMarkdown_Extract(t *testing.T) {

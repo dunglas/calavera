@@ -6,8 +6,8 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/dunglas/calavera/schema"
 	"github.com/PuerkitoBio/goquery"
+	"github.com/dunglas/calavera/schema"
 	"github.com/microcosm-cc/bluemonday"
 	"github.com/russross/blackfriday"
 	"regexp"
