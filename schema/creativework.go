@@ -1,5 +1,6 @@
 package schema
 
+// CreativeWork contains all data and metadata of a given page.
 type CreativeWork struct {
 	JsonLd
 	Name string `json:"name"`
@@ -13,6 +14,7 @@ type CreativeWork struct {
 	Publisher string `json:"publisher,omitempty"`
 }
 
+// NewCreativeWork initializes a new CreativeWork instance with some sensitive default values.
 func NewCreativeWork() *CreativeWork {
 	return &CreativeWork{JsonLd: JsonLd{Context: "http://schema.org", Type: "CreativeWork"}}
 }

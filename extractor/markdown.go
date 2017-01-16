@@ -13,9 +13,14 @@ import (
 	"regexp"
 )
 
+// Markdown is an extractor converting the content of .md files to HTML.
 type Markdown struct {
 }
 
+// Extract converts the Markdown syntax to HTML in a secure way.
+// The generated file is sanitized: all special tags and characters stripped (JavaScript, CSS...) or escaped.
+// A "class" attributes containing language indication for syntax highlighting is added to all code snippets.
+// All references to ".md" files are converted to links pointing to ".jsonld" files.
 func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string) error {
 	markdownContent, err := ioutil.ReadFile(path)
 	if nil != err {
