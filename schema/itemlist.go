@@ -18,7 +18,7 @@ type ItemList struct {
 	Element []string `json:"element"`
 }
 
-// NewPerson initializes a new ItemList instance with some sensitive default values.
+// NewItemList initializes a new ItemList instance with some sensitive default values.
 func NewItemList() *ItemList {
 	return &ItemList{
 		Id: "_index.jsonld",

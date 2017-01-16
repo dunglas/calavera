@@ -24,7 +24,7 @@ func init() {
 type Git struct {
 }
 
-// // Extract extracts the list of contributors to the file, and date of modifications.
+// Extract extracts the list of contributors to the file, and date of modifications.
 func (git Git) Extract(creativeWork *schema.CreativeWork, path string) error {
 	if "" == gitPath {
 		return nil

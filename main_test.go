@@ -7,7 +7,7 @@ import (
 
 func exists(path string, t *testing.T) {
 	if _, err := os.Stat(path); os.IsNotExist(err) {
-		t.Error(`The file "`+path+`" must exist.`)
+		t.Error(`The file "` + path + `" must exist.`)
 	}
 }
 
