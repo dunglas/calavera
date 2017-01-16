@@ -1,5 +1,4 @@
 language: go
-
 go:
   - '1.5'
   - '1.6'
@@ -8,8 +7,9 @@ go:
 
 before_install:
   - go get github.com/mattn/goveralls
+  - go get github.com/kardianos/govendor
 
 script:
-  - $HOME/gopath/bin/goveralls -service=travis-ci
-  - go build
-  - ! gofmt -d path/to/file.go 2>&1 | read
+  - GO15VENDOREXPERIMENT=1 govendor sync
+  - GO15VENDOREXPERIMENT=1 govendor install
+  - GO15VENDOREXPERIMENT=1 goveralls -service=travis-ci

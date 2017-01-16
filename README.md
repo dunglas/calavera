@@ -28,6 +28,10 @@ If you don't already have a [Go workspace](https://golang.org/doc/code.html#Work
     $ mkdir -p ~/workspace/go
     $ export GOPATH=~/workspace/go
 
+Then, download [govendor](https://github.com/kardianos/govendor) to manage the dependencies of the project:
+
+    $ go get -u github.com/kardianos/govendor
+
 Create the appropriate directory structure and download the source code:
 
     $ mkdir -p ~/workspace/go/src/github.com/dunglas
@@ -37,8 +41,8 @@ Create the appropriate directory structure and download the source code:
 Go to the source code directory, download external libraries and compile the program:    
 
     $ cd calavera
-    $ go get
-    $ go install
+    $ ~/workspace/go/bin/govendor sync # Download dependencies
+    $ ~/workspace/go/bin/govendor install # Install the app
 
 ## Usage
 
