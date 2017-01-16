@@ -11,6 +11,7 @@ JSON-LD files are easily consumed by JavaScript libraries and framework such as 
 
 Websites generated with Calavera can be freely and easily hosted on [GitHub Pages](https://pages.github.com/).
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/dunglas/calavera)](https://goreportcard.com/report/github.com/dunglas/calavera)
 [![Travis](https://img.shields.io/travis/dunglas/calavera.svg?maxAge=2592000)](https://travis-ci.org/dunglas/calavera)
 [![Coveralls](https://img.shields.io/coveralls/dunglas/calavera.svg?maxAge=2592000)](https://coveralls.io/github/dunglas/calavera)
 [![Docker Automated buil](https://img.shields.io/docker/automated/dunglas/calavera.svg?maxAge=2592000)](https://hub.docker.com/r/dunglas/calavera/)

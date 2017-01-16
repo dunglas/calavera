@@ -21,10 +21,10 @@ func init() {
 }
 
 // Git extracts metadata from the Git repository containing Markdown files.
-// It extracts the list of contributors to the file, and date of modifications.
 type Git struct {
 }
 
+// // Extract extracts the list of contributors to the file, and date of modifications.
 func (git Git) Extract(creativeWork *schema.CreativeWork, path string) error {
 	if ("" == gitPath) {
 		return nil
