@@ -20,6 +20,8 @@ func init() {
 	}
 }
 
+// Git extracts metadata from the Git repository containing Markdown files.
+// It extracts the list of contributors to the file, and date of modifications.
 type Git struct {
 }
 
