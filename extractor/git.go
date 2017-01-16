@@ -15,7 +15,7 @@ func init() {
 	var err error
 
 	gitPath, err = exec.LookPath("git")
-	if (nil != err) {
+	if nil != err {
 		log.Fatalln("git is not available in the PATH. Install it to extract git metadata.")
 	}
 }
@@ -26,7 +26,7 @@ type Git struct {
 }
 
 func (git Git) Extract(creativeWork *schema.CreativeWork, path string) error {
-	if ("" == gitPath) {
+	if "" == gitPath {
 		return nil
 	}
 
