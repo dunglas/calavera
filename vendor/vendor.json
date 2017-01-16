@@ -1,0 +1,49 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "ELhX7bnlRsFCakJuYkST11pfRCU=",
+			"path": "github.com/PuerkitoBio/goquery",
+			"revision": "77cbaef46a3af185a3afb87f88a366f3dee2a904",
+			"revisionTime": "2016-06-15T13:48:05Z"
+		},
+		{
+			"checksumSHA1": "OYN1t17wW+cvv7qj+xceBecAlrg=",
+			"path": "github.com/andybalholm/cascadia",
+			"revision": "3ad29d1ad1c4f2023e355603324348cf1f4b2d48",
+			"revisionTime": "2015-07-30T17:44:59Z"
+		},
+		{
+			"checksumSHA1": "xeK77w1nByTp2wpfa61fW5AE4cY=",
+			"path": "github.com/microcosm-cc/bluemonday",
+			"revision": "4ac6f27528d0a3f2a59e0b0a6f6b3ff0bb89fe20",
+			"revisionTime": "2015-11-02T18:20:00Z"
+		},
+		{
+			"checksumSHA1": "LLXCTki1MwHw3oIUHHV+oRAw6ro=",
+			"path": "github.com/russross/blackfriday",
+			"revision": "1d6b8e9301e720b08a8938b8c25c018285885438",
+			"revisionTime": "2016-05-31T11:12:24Z"
+		},
+		{
+			"checksumSHA1": "nvBDBHTcW+YFdvUudLVBZBuXbGc=",
+			"path": "github.com/shurcooL/sanitized_anchor_name",
+			"revision": "10ef21a441db47d8b13ebcc5fd2310f636973c77",
+			"revisionTime": "2015-10-28T00:19:15Z"
+		},
+		{
+			"checksumSHA1": "dcOJtT2YpM6/qNQUa+IGGjFUy0k=",
+			"path": "golang.org/x/net/html",
+			"revision": "bc3663df0ac92f928d419e31e0d2af22e683a5a2",
+			"revisionTime": "2016-06-21T20:48:10Z"
+		},
+		{
+			"checksumSHA1": "BBN+OcVpSYnOYWdUq9A952+dCZA=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "bc3663df0ac92f928d419e31e0d2af22e683a5a2",
+			"revisionTime": "2016-06-21T20:48:10Z"
+		}
+	],
+	"rootPath": "github.com/dunglas/calavera"
+}

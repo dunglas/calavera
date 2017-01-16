@@ -2,7 +2,7 @@ package schema
 
 type Person struct {
 	JsonLd
-	Name string `json:name`
+	Name string `json:"name"`
 	Email string `json:"email,omitempty"`
 }
 
