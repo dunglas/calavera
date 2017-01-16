@@ -28,10 +28,30 @@ func TestNewCreativeWork(t *testing.T) {
 	creativeWork := NewCreativeWork()
 
 	if creativeWork.Type != "CreativeWork" {
-		t.Error("The type must be \"CreativeWork\".")
+		t.Error(`The type must be "CreativeWork".`)
 	}
 
 	if creativeWork.Context != "http://schema.org" {
-		t.Error("The type must be Schema.org.")
+		t.Error(`The context must be "http://schema.org".`)
+	}
+}
+
+func TestNewItemList(t *testing.T) {
+	itemList := NewItemList()
+
+	if itemList.Context.Vocab != "http://schema.org/" {
+		t.Error(`The vocab must be "http://schema.org/" with a trailing slash.`)
+	}
+
+	if itemList.Context.Element.Id != "itemListElement" {
+		t.Error(`The context's id must be "itemListElement".`)
+	}
+
+	if itemList.Context.Element.Type != "@id" {
+		t.Error(`The type id must be "@id".`)
+	}
+
+	if itemList.Id != "_index.jsonld" {
+		t.Error(`The id must be "_index.jsonld".`)
 	}
 }
