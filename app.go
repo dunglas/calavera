@@ -9,44 +9,24 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"sync"
 
 	"github.com/dunglas/calavera/extractor"
 	"github.com/dunglas/calavera/schema"
 )
 
-const filePerms = 0644
-const dirPerms = 0755
+const FILE_PERMS = 0644
+const DIR_PERMS = 0755
 
 func main() {
-	flag.Usage = func() {
-		fmt.Println("calavera input_directory output_directory")
-	}
-
-	prettifyBool := flag.Bool("prettify", false, "Prettify json output")
-
-	flag.Parse()
-
-	if len(flag.Args()) != 2 {
-		log.Fatalln("Input and output directories are mandatory arguments.")
-	}
+	inputPath, outputPath, prettify := parseFlags()
 
 	var files []string
-	var extractors = []extractor.Extractor{extractor.Markdown{}, extractor.Git{}}
+	var extractors = []extractor.Extractor{extractor.NewMarkdown(inputPath)}
 
-	inputPath, err := filepath.Abs(flag.Arg(0))
-	check(err)
-
-	outputPath, err := filepath.Abs(flag.Arg(1))
-	check(err)
-
-	wd, err := os.Getwd()
-	if nil != err {
-		check(err)
-	}
-
-	if err := os.Chdir(inputPath); err != nil {
-		check(err)
+	if ge, err := extractor.NewGit(inputPath); nil == err {
+		extractors = append(extractors, ge)
+	} else {
+		log.Println(`"` + inputPath + `" is not a Git repository. Authors and date metadata will NOT be extracted.`)
 	}
 
 	walkFunc := func(path string, _ os.FileInfo, err error) error {
@@ -68,24 +48,13 @@ func main() {
 	}
 
 	entrypoint := schema.NewItemList()
-	var wg sync.WaitGroup
 	for _, file := range files {
-		wg.Add(1)
-		go func(file string) {
-			convert(file, outputPath, extractors, *prettifyBool)
-			defer wg.Done()
-		}(file)
-
-		entrypoint.Element = append(entrypoint.Element, strings.Replace(file, ".md", ".jsonld", 1))
+		// Cannot use a go routine because src-d/go-git isn't thread safe
+		convert(file, outputPath, extractors, prettify)
+		entrypoint.Element = append(entrypoint.Element, getOutputPath(file))
 	}
 
-	wg.Wait()
-
-	if err := os.Chdir(wd); err != nil {
-		check(err)
-	}
-
-	check(ioutil.WriteFile(outputPath+"/_index.jsonld", marshal(entrypoint, *prettifyBool), filePerms))
+	check(ioutil.WriteFile(outputPath+"/_index.jsonld", marshal(entrypoint, prettify), FILE_PERMS))
 }
 
 func marshal(v interface{}, prettify bool) []byte {
@@ -101,6 +70,37 @@ func marshal(v interface{}, prettify bool) []byte {
 	return jsonContent
 }
 
+func check(err error) {
+	if nil == err {
+		return
+	}
+
+	log.Fatalln(err)
+	panic(err)
+}
+
+func parseFlags() (string, string, bool) {
+	flag.Usage = func() {
+		fmt.Println("calavera input_directory output_directory")
+	}
+
+	prettify := flag.Bool("prettify", false, "Prettify json output")
+
+	flag.Parse()
+
+	if len(flag.Args()) != 2 {
+		log.Fatalln("Input and output directories are mandatory arguments.")
+	}
+
+	inputPath, err := filepath.Abs(flag.Arg(0))
+	check(err)
+
+	outputPath, err := filepath.Abs(flag.Arg(1))
+	check(err)
+
+	return inputPath, outputPath, *prettify
+}
+
 func convert(path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
 	creativeWork := schema.NewCreativeWork()
 
@@ -111,19 +111,16 @@ func convert(path string, outputDirectory string, extractors []extractor.Extract
 
 	jsonContent := marshal(creativeWork, prettify)
 
-	outputPath := fmt.Sprint(outputDirectory, "/", path[:len(path)-3], ".jsonld")
+	outputPath := outputDirectory + "/" + getOutputPath(path)
 	outputSubdirectory := filepath.Dir(outputPath)
 
-	err := os.MkdirAll(outputSubdirectory, dirPerms)
+	err := os.MkdirAll(outputSubdirectory, DIR_PERMS)
 	check(err)
 
-	err = ioutil.WriteFile(outputPath, jsonContent, filePerms)
+	err = ioutil.WriteFile(outputPath, jsonContent, FILE_PERMS)
 	check(err)
 }
 
-func check(err error) {
-	if err != nil {
-		log.Fatalln(err)
-		panic(err)
-	}
+func getOutputPath(originalPath string) string {
+	return originalPath[:len(originalPath)-3] + ".jsonld"
 }
