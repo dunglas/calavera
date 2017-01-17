@@ -14,8 +14,8 @@ import (
 	"github.com/dunglas/calavera/schema"
 )
 
-const FILE_PERMS = 0644
-const DIR_PERMS = 0755
+const filePerms = 0644
+const dirPerms = 0755
 
 func main() {
 	inputPath, outputPath, prettify := parseFlags()
@@ -54,7 +54,7 @@ func main() {
 		entrypoint.Element = append(entrypoint.Element, getOutputPath(file))
 	}
 
-	check(ioutil.WriteFile(outputPath+"/_index.jsonld", marshal(entrypoint, prettify), FILE_PERMS))
+	check(ioutil.WriteFile(outputPath+"/_index.jsonld", marshal(entrypoint, prettify), filePerms))
 }
 
 func marshal(v interface{}, prettify bool) []byte {
@@ -114,10 +114,10 @@ func convert(path string, outputDirectory string, extractors []extractor.Extract
 	outputPath := outputDirectory + "/" + getOutputPath(path)
 	outputSubdirectory := filepath.Dir(outputPath)
 
-	err := os.MkdirAll(outputSubdirectory, DIR_PERMS)
+	err := os.MkdirAll(outputSubdirectory, dirPerms)
 	check(err)
 
-	err = ioutil.WriteFile(outputPath, jsonContent, FILE_PERMS)
+	err = ioutil.WriteFile(outputPath, jsonContent, filePerms)
 	check(err)
 }
 
