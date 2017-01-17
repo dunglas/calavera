@@ -15,6 +15,12 @@ import (
 
 // Markdown is an extractor converting the content of .md files to HTML.
 type Markdown struct {
+	inputDirectory string
+}
+
+// NewMarkdown creates a new Markdown extractor
+func NewMarkdown(inputDirectory string) *Markdown {
+	return &Markdown{inputDirectory: inputDirectory}
 }
 
 // Extract converts the Markdown syntax to HTML in a secure way.
@@ -22,7 +28,7 @@ type Markdown struct {
 // A "class" attributes containing language indication for syntax highlighting is added to all code snippets.
 // All references to ".md" files are converted to links pointing to ".jsonld" files.
 func (markdown Markdown) Extract(creativeWork *schema.CreativeWork, path string) error {
-	markdownContent, err := ioutil.ReadFile(path)
+	markdownContent, err := ioutil.ReadFile(markdown.inputDirectory + "/" + path)
 	if nil != err {
 		return err
 	}
