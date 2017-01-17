@@ -1,11 +1,11 @@
 package main
 
 import (
-	"os"
-	"testing"
-	"io/ioutil"
 	"encoding/json"
 	"github.com/dunglas/calavera/schema"
+	"io/ioutil"
+	"os"
+	"testing"
 )
 
 func exists(path string, t *testing.T) {
