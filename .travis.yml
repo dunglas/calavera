@@ -1,7 +1,5 @@
 language: go
 go:
-  - '1.5'
-  - '1.6'
   - '1.7'
   - 'tip'
 
@@ -10,6 +8,6 @@ before_install:
   - go get github.com/kardianos/govendor
 
 script:
-  - GO15VENDOREXPERIMENT=1 govendor sync
-  - GO15VENDOREXPERIMENT=1 govendor install
-  - GO15VENDOREXPERIMENT=1 goveralls -service=travis-ci
+  - govendor sync
+  - govendor install
+  - goveralls -service=travis-ci
