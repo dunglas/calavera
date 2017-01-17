@@ -3,6 +3,9 @@ package main
 import (
 	"os"
 	"testing"
+	"io/ioutil"
+	"encoding/json"
+	"github.com/dunglas/calavera/schema"
 )
 
 func exists(path string, t *testing.T) {
@@ -21,4 +24,20 @@ func TestFoo(t *testing.T) {
 	exists("out/index.jsonld", t)
 	exists("out/foo.jsonld", t)
 	exists("out/level1/bar.jsonld", t)
+
+	bar, _ := ioutil.ReadFile("out/level1/bar.jsonld")
+	barDoc := &schema.CreativeWork{}
+	json.Unmarshal(bar, barDoc)
+
+	if "level1/bar.jsonld" != barDoc.Id {
+		t.Error(`The "@id" property of "level1/bar.jsonld" must be set.`)
+	}
+
+	index, _ := ioutil.ReadFile("out/_index.jsonld")
+	indexDoc := &schema.CreativeWork{}
+	json.Unmarshal(index, indexDoc)
+
+	if "_index.jsonld" != indexDoc.Id {
+		t.Error(`The "@id" property of "_index.jsonld" must be set.`)
+	}
 }

@@ -103,6 +103,7 @@ func parseFlags() (string, string, bool) {
 
 func convert(path string, outputDirectory string, extractors []extractor.Extractor, prettify bool) {
 	creativeWork := schema.NewCreativeWork()
+	creativeWork.Id = getOutputPath(path)
 
 	for _, extractor := range extractors {
 		err := extractor.Extract(creativeWork, path)
@@ -111,7 +112,7 @@ func convert(path string, outputDirectory string, extractors []extractor.Extract
 
 	jsonContent := marshal(creativeWork, prettify)
 
-	outputPath := outputDirectory + "/" + getOutputPath(path)
+	outputPath := outputDirectory + "/" + creativeWork.Id
 	outputSubdirectory := filepath.Dir(outputPath)
 
 	err := os.MkdirAll(outputSubdirectory, dirPerms)
