@@ -2,7 +2,7 @@
 
 Calavera helps to create a full-Javascript webapp from [Markdown](http://daringfireball.net/projects/markdown/) files.
 
-Basically, it converts Markdown files stored in a [Git](https://git-scm.com/) repository to [JSON-LD](json-ld.org) files
+Basically, it converts Markdown files stored in a [Git](https://git-scm.com/) repository to [JSON-LD](http://json-ld.org/) files
 using the [Schema.org](https://schema.org/) vocabulary.
 Those files include metadata extracted from the Git repository (author name, last modification date...).
 
